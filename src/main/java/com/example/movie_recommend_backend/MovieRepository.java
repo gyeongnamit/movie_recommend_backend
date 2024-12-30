@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository // 이 인터페이스가 저장소임을 나타내는 어노테이션
 
@@ -14,4 +15,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     // 개봉일 기준 내림차순 정렬
     List<Movie> findAllByOrderByOpenDateDesc();
+    //제목이 일치하는 영화 조회
+    Optional<Movie> findByTitle(String title);
 }

@@ -40,6 +40,16 @@ public class MovieController {
         return response.getBody();
     }
 
+     // title 이 일치하는 영화 1개 조회해서 리턴
+     @PostMapping("/movie/get_movie")
+     public Movie getMovie(@RequestBody Map<String, String> request) {
+         String title = request.get("title");
+         // 제목을 기준으로 영화 검색 (일치하는 첫 번째 결과 반환)
+         
+        return movieRepository.findByTitle(title)
+        .orElseThrow(() -> new RuntimeException("Movie not found with title: " + title));
+     }
+
      // 최신 영화 10개 조회 (개봉일 기준 내림차순)
     @GetMapping("/movie/movie_latest")
     public List<Movie> getLatestMovies() {
